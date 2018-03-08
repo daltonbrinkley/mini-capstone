@@ -1,5 +1,5 @@
 require "unirest"
-require "tty-table"
+# require "tty-table"
 
 system "clear"
 
@@ -18,18 +18,17 @@ elsif input_option == "2"
   p products
 end
 
-  table_header = ['Name:','Price:','Image URL:','Description:']
+  # table_header = ['Name:','Price:','Image URL:','Description:']
   
-  # products.length.times do
-  #   index = 0
+  # table_body = 
+  #   products.each do |product|
+  #   array = []
+  #   array << products["name"], products["price"], products["image_url"], products["description"]
+  #   end
 
-  table_body = [[products[0]["name"], products[0]["price"], products[0]["image_url"], products[0]["description"]]]
-#     index = index + 1
-# end
-
-  table = TTY::Table.new table_header, table_body
-  puts table.render(:ascii)
+  # p table_body
 
 
-# table = TTY::Table.new ['Name:','Price:','Image URL:','Description:'], [[Product.first[name:], 'a2'], ['b1', 'b2']]
-# p table.render(:ascii)
+
+  # table = TTY::Table.new table_header, table_body
+  # puts table.render(:ascii)
