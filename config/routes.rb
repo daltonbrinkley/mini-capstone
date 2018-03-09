@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     get "/show_first_product_url" => "products#show_first_product_method"
     get "/products" => "products#index"
     get "/products/:id" => "products#show"
+    post "/products" => "products#create"
   end
 end
 

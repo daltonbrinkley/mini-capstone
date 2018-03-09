@@ -10,6 +10,17 @@ class V1::ProductsController < ApplicationController
     render json: product.as_json
   end
 
+  def create
+    product = Product.new(
+      name: "Beagle"
+      price: 500
+      image_url: "https://i.ytimg.com/vi/bx7BjjqHf2U/maxresdefault.jpg"
+      description: "Cute male beagle puppy, looking for a new home!  Great around families!"
+      )
+    product.save
+    render json: product.as_json
+  end
+
   def show_all_products_method
     product = Product.all
     render json: product.as_json
