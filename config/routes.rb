@@ -3,5 +3,7 @@ Rails.application.routes.draw do
   namespace :v1 do
     get "/show_all_products_url" => "products#show_all_products_method"
     get "/show_first_product_url" => "products#show_first_product_method"
+    get "/products" => "products#index"
   end
 end
+
