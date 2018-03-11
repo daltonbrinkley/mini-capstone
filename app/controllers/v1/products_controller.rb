@@ -10,6 +10,17 @@ class V1::ProductsController < ApplicationController
     render json: product.as_json
   end
 
+  def update
+    product_id = params["id"]
+    product = Product.find_by(id: product_id)
+    product.name = params["input_name"] || product.name
+    product.price = params["input_price"] || product.price
+    product.image_url = params["input_url"] || product.image_url
+    product.description = params["input_description"] || product.input_description
+    product.save
+    render json: product.as_json
+  end
+
   def create
     product = Product.new(
       name: params["input_name"],
@@ -21,13 +32,10 @@ class V1::ProductsController < ApplicationController
     render json: product.as_json
   end
 
-  def show_all_products_method
-    product = Product.all
-    render json: product.as_json
-  end
-
-  def show_first_product_method
-    product = Product.first
-    render json: product.as_json
+  def destroy
+    product_id = params["id"]
+    product = Product.find_by(id: product_id)
+    product.destroy
+    render json: {message: "Product successfully deleted!!!"}
   end
 end
