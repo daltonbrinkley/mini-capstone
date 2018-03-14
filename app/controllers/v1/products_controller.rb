@@ -17,8 +17,11 @@ class V1::ProductsController < ApplicationController
     product.price = params["input_price"] || product.price
     product.image_url = params["input_url"] || product.image_url
     product.description = params["input_description"] || product.input_description
-    product.save
-    render json: product.as_json
+    if product.save
+      render json: product.as_json
+    else
+      render json: {errors: product.errors.full_messages}, status: :unprocessable_entity
+    end
   end
 
   def create
@@ -28,8 +31,11 @@ class V1::ProductsController < ApplicationController
       image_url: params["input_url"],
       description: params["input_description"]
       )
-    product.save
-    render json: product.as_json
+    if product.save
+      render json: product.as_json
+    else
+      render json: {errors: product.errors.full_messages}, status: :unprocessable_entity
+    end
   end
 
   def destroy
