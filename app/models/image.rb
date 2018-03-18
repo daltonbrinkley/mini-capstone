@@ -1,4 +1,7 @@
 class Image < ApplicationRecord
+  # An image belongs to a product
+  belongs_to :product
+  
   def as_json
     {
       id: id,
