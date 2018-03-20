@@ -1,4 +1,7 @@
 require "unirest"
+require "tty-prompt"
+
+prompt = TTY::Prompt.new
 
 system "clear"
 
@@ -10,6 +13,7 @@ puts "[2] Find Product by ID"
 puts "[3] Create a product!" 
 puts "[4] Update a product!"
 puts "[5] Delete a product!"
+puts "[signup] Create a user account!"
 
 input_option = gets.chomp
 if input_option == "1"
@@ -89,4 +93,20 @@ elsif input_option == "5"
   response = Unirest.delete("http://localhost:3000/v1/products/#{id}")  
   product = response.body
   puts JSON.pretty_generate(product)
+
+elsif input_option == "signup"
+  params = {}
+  print "Please enter full name: "
+  params["name"] = gets.chomp
+  print "Enter your email: "
+  params["email"] = gets.chomp
+  # print "Create your password: "
+  # params["password"] = gets.chomp
+  params["password"] = prompt.mask("What is your password?")
+  # print "Re-enter your new password: "
+  # params["password_confirmation"] = gets.chomp
+  params["password_confirmation"] = prompt.mask("Please re-enter your new password for verification: ")
+
+  response = Unirest.post("http://localhost:3000/v1/users", parameters: params)
+  p response.body  
 end
