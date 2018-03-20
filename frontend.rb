@@ -1,9 +1,27 @@
 require "unirest"
 require "tty-prompt"
-
 prompt = TTY::Prompt.new
 
+# Login and set jwt as part of Unirest requests
+print "You are required to log in.  Please enter your email: "
+email = gets.chomp
+password = prompt.mask("Please enter your password: ") 
+
+response = Unirest.post(
+  "http://localhost:3000/user_token",
+  parameters: {
+    auth: {
+      email: "#{email}",
+      password: "#{password}"
+    }
+  }
+)
+jwt = response.body["jwt"]
+Unirest.default_header("Authorization", "Bearer #{jwt}")
+
 system "clear"
+
+puts "Your jwt is #{jwt}"
 
 puts "Choose an option"
 puts "[1] Products Index (all products)"

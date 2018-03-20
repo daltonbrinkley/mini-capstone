@@ -39,4 +39,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'tty-table'
 
+gem 'knock'
+
 
