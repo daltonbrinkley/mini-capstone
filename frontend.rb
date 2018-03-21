@@ -32,6 +32,7 @@ puts "[3] Create a product!"
 puts "[4] Update a product!"
 puts "[5] Delete a product!"
 puts "[signup] Create a user account!"
+puts "[6] Start an order!"
 
 input_option = gets.chomp
 if input_option == "1"
@@ -127,4 +128,15 @@ elsif input_option == "signup"
 
   response = Unirest.post("http://localhost:3000/v1/users", parameters: params)
   p response.body  
+
+elsif input_option == "6"
+  params = {}
+  print "Please enter the product id: "
+  params["product_id"] = gets.chomp
+  print "Please enter the quantity: "
+  params["quantity"] = gets.chomp
+
+  response = Unirest.post("http://localhost:3000/v1/orders", parameters: params)
+  order = response.body
+  puts JSON.pretty_generate(order)  
 end

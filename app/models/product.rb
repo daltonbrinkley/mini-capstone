@@ -4,6 +4,8 @@ class Product < ApplicationRecord
   validates :price, presence: true, numericality: { greater_than: 0 }
   validates :description, length: { in: 10..500 }
 
+  has_many :orders
+
 # A product has many images:
   has_many :images
   # def images
