@@ -6,6 +6,9 @@ class Product < ApplicationRecord
 
   has_many :orders
 
+  has_many :category_products
+  has_many :categories, through: :category_products
+
 # A product has many images:
   has_many :images
   # def images
@@ -44,7 +47,8 @@ class Product < ApplicationRecord
       description: description,
       is_discounted: is_discounted,
       supplier: supplier.as_json,
-      images: images.as_json
+      images: images.as_json,
+      categories: categories.map { |category| category.name}
       # images: images.map { |image| image.url }
     }
   end

@@ -27,6 +27,7 @@ puts "Choose an option"
 puts "[1] Products Index (all products)"
 puts "[1.1] Search Products by Name: "
 puts "[1.2] Sort products by price ascending"
+puts "[1.3] Show products in Small Breeds category"
 puts "[2] Find Product by ID"
 puts "[3] Create a product!" 
 puts "[4] Update a product!"
@@ -51,6 +52,12 @@ elsif input_option == "1.1"
 elsif input_option == "1.2"
   print "Products sorted by price:"
   response = Unirest.get("http://localhost:3000/v1/products?sort_by_price=true")
+  products = response.body
+  puts JSON.pretty_generate(products)
+
+elsif input_option == "1.3"
+  print "Products in Small Breeds category:"
+  response = Unirest.get("http://localhost:3000/v1/products?category=Small Breeds")
   products = response.body
   puts JSON.pretty_generate(products)
 
