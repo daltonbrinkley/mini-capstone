@@ -138,11 +138,11 @@ elsif input_option == "signup"
   p response.body  
 
 elsif input_option == "6"
-  params = {}
-  print "Please enter the product id: "
-  params["product_id"] = gets.chomp
-  print "Please enter the quantity: "
-  params["quantity"] = gets.chomp
+  # params = {}
+  # print "Please enter the product id: "
+  # params["product_id"] = gets.chomp
+  # print "Please enter the quantity: "
+  # params["quantity"] = gets.chomp
 
   response = Unirest.post("http://localhost:3000/v1/orders", parameters: params)
   order = response.body
