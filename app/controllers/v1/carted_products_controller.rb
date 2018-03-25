@@ -20,4 +20,8 @@ class V1::CartedProductsController < ApplicationController
     carted_products = current_user.carted_products.select { |carted_product| carted_product[:status] == "carted"}
     render json: carted_products.as_json
   end
+
+  # def destroy
+  # end 
+  
 end
