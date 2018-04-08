@@ -49,7 +49,7 @@ class Product < ApplicationRecord
       description: description,
       is_discounted: is_discounted,
       supplier: supplier.as_json,
-      images: images.as_json,
+      image: images[0] ? images[0].url : "no image",
       categories: categories.map { |category| category.name}
       # images: images.map { |image| image.url }
     }
