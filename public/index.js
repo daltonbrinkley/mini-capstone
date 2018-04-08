@@ -7,4 +7,3 @@ productContainer.appendChild(productTemplate.content.cloneNode(true));
 productContainer.appendChild(productTemplate.content.cloneNode(true));
 productContainer.appendChild(productTemplate.content.cloneNode(true));
 productContainer.appendChild(productTemplate.content.cloneNode(true));
-productContainer.appendChild(productTemplate.content.cloneNode(true));
