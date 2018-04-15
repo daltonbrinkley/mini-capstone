@@ -123,7 +123,7 @@
   <div class="row">
     <div v-for="product in products" class="col-md-4">
       <div class="card mb-5 bg-light border-dark">
-        <img class="card-img-top" src="http://www.frenchbulldogbreed.net/files/French-bulldog-puppy-for-sale-Teddy-02.jpg" alt="Card image cap">
+        <img class="card-img-top" v-bind:src="product.image" alt="Card image cap">
         <div class="card-body">
           <h4 class="card-title">{{ product.name }}</h4>
           <p class="card-text price">{{ product.price }}</p>
