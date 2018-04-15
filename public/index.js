@@ -132,6 +132,37 @@ var LogoutPage = {
   }
 };
 
+var ProductsNewPage = {
+  template: "#products-new-page",
+  data: function() {
+    return {
+      name: "",
+      price: "",
+      description: "",
+      errors: []
+    };
+  },
+  methods: {
+    submit: function() {
+      var params = {
+        input_name: this.name,
+        input_price: this.price,
+        input_description: this.description,
+      };
+      axios
+        .post("/v1/products", params)
+        .then(function(response) {
+          router.push("/");
+        })
+        .catch(
+          function(error) {
+            this.errors = error.response.data.errors;
+          }.bind(this)
+        );
+    }
+  }
+};
+
 
 var router = new VueRouter({
   routes: [{ path: "/", component: HomePage },
@@ -139,6 +170,7 @@ var router = new VueRouter({
     { path: "/signup", component: SignupPage },
     { path: "/login", component: LoginPage },
     { path: "/logout", component: LogoutPage },
+    { path: "/products/new", component: ProductsNewPage }
   ],
   scrollBehavior: function(to, from, savedPosition) {
     return { x: 0, y: 0 };
