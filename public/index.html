@@ -86,8 +86,9 @@
 </template>
 
 <template id="home-page">
-<div class="vue-component container">
-  <div class="jumbotron bg-light">
+  <div class="vue-component container">
+  
+    <div class="jumbotron bg-light">
     <h1 class="display-4">Find your new companion...</h1>
     <p class="lead">With loyal connections to the top breeders in the country, we offer the best quality puppies here at Dalton's Purebreds.  See below for all available puppies!</p>
     <hr class="my-4">
@@ -95,9 +96,9 @@
     <p class="lead">
       <a class="btn btn-primary btn-lg" href="#" role="button">Learn more about our Breeders</a>
     </p>
-  </div>
+    </div>
 
-  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
       <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -122,25 +123,45 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
-  </div>
+    </div>
 
-  <div class="row products-row">
-    <div v-for="product in products" class="col-md-4">
-      <div class="card mb-5 bg-light border-dark">
-        <img class="card-img-top" v-bind:src="product.image" alt="Card image cap">
-        <div class="card-body">
-          <h4 class="card-title">{{ product.name }}</h4>
-          <p class="card-text price">{{ product.price }}</p>
-          <p class="card-text description">{{ product.description }}</p>
-          <a href="#" class="btn btn-primary">More info</a>
+    <div class="row products-row">
+      <div v-for="product in products" class="col-md-4">
+        <div class="card mb-5 bg-light border-dark">
+          <img class="card-img-top" v-bind:src="product.image" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">{{ product.name }}</h4>
+            <p class="card-text price">{{ product.price }}</p>
+            <p class="card-text description">{{ product.description }}</p>
+            <a href="#" class="btn btn-primary" v-on:click="setCurrentProduct(product)" data-toggle="modal" data-target="#exampleModal">More info</a>
+          </div>
         </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ currentProduct.name }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{ currentProduct.description}}
+      </div>
+      <div class="modal-body">
+        ${{ currentProduct.price}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
-
-</template>
-
 </div>
+      </div>
+  </div>
+</template>
 
 <template id="signup-page">
   <div class="vue-component">

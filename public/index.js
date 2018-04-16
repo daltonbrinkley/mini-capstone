@@ -31,7 +31,12 @@ var HomePage = {
   data: function() {
     return {
       message: "Welcome to Vue.js!",
-      products: []
+      products: [],
+      currentProduct: {
+        name: "Product Name Goes Here",
+        price: "Price goes here",
+        description: "Description goes here"
+      }
     };
   },
   created: function() {
@@ -41,7 +46,11 @@ var HomePage = {
     }.bind(this)
     );
   },
-  methods: {},
+  methods: {
+    setCurrentProduct: function(inputProduct) {
+      this.currentProduct = inputProduct;
+    }
+  },
   computed: {}
 };
 
@@ -162,7 +171,6 @@ var ProductsNewPage = {
     }
   }
 };
-
 
 var router = new VueRouter({
   routes: [{ path: "/", component: HomePage },
