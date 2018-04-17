@@ -1,6 +1,6 @@
 class V1::ProductsController < ApplicationController
-  # before_action :authenticate_admin, except: [:index, :show]
-  before_action :authenticate_user
+  before_action :authenticate_admin, except: [:index, :show]
+  # before_action :authenticate_user
 
   def index
     products = Product.all
