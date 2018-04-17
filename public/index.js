@@ -30,35 +30,13 @@ var HomePage = {
   template: "#home-page",
   data: function() {
     return {
-      message: "Welcome to Vue.js!",
+      message: "",
       products: [],
       currentProduct: {
-        name: "Product Name Goes Here",
-        price: "Price goes here",
+        name: "Name goes here",
+        price: "Pice goes here",
         description: "Description goes here"
       }
-    };
-  },
-  created: function() {
-    axios.get("v1/products").then(function(response) { 
-      this.products = response.data;
-      console.log(this.products);
-    }.bind(this)
-    );
-  },
-  methods: {
-    setCurrentProduct: function(inputProduct) {
-      this.currentProduct = inputProduct;
-    }
-  },
-  computed: {}
-};
-
-var SamplePage = {
-  template: "#sample-page",
-  data: function() {
-    return {
-      message: "Welcome to the Sample Page!!!"
     };
   },
   created: function() {},
@@ -118,9 +96,14 @@ var LoginPage = {
         .then(function(response) {
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + response.data.jwt;
+          console.log(response.data.user);
+
+          this.$root.userName = response.data.user.name;
+
+
           localStorage.setItem("jwt", response.data.jwt);
           router.push("/");
-        })
+        }.bind(this))
         .catch(
           function(error) {
             this.errors = ["Invalid email or password."];
@@ -133,11 +116,16 @@ var LoginPage = {
 };
 
 var LogoutPage = {
-  template: "<h1>Logout</h1>",
+  template: "#logout-page",
+  data: function() {
+    return {
+      message: "You've successfully logged out!"
+    };
+  },
   created: function() {
     axios.defaults.headers.common["Authorization"] = undefined;
     localStorage.removeItem("jwt");
-    router.push("/");
+    // router.push("/");
   }
 };
 
@@ -148,7 +136,6 @@ var ProductsNewPage = {
       name: "",
       price: "",
       description: "",
-      errors: []
     };
   },
   methods: {
@@ -172,13 +159,40 @@ var ProductsNewPage = {
   }
 };
 
+var IndexPage = {
+  template: "#index-page",
+  data: function() {
+    return {
+      message: "",
+      products: [],
+      currentProduct: {
+        name: "Name goes here",
+        price: "Pice goes here",
+        description: "Description goes here"
+      }
+    };
+  },
+  created: function() {
+    axios.get("v1/products").then(function(response) { 
+      this.products = response.data;
+      console.log(this.products);
+    }.bind(this)
+    );
+  },
+  methods: {},
+  computed: {}
+};
+
+
 var router = new VueRouter({
-  routes: [{ path: "/", component: HomePage },
-    { path: "/sample", component: SamplePage },
+  routes: [
+    { path: "/", component: HomePage },
+    { path: "/home", component: HomePage },
     { path: "/signup", component: SignupPage },
     { path: "/login", component: LoginPage },
     { path: "/logout", component: LogoutPage },
-    { path: "/products/new", component: ProductsNewPage }
+    { path: "/products/new", component: ProductsNewPage },
+    { path: "/index", component: IndexPage},
   ],
   scrollBehavior: function(to, from, savedPosition) {
     return { x: 0, y: 0 };
@@ -188,6 +202,12 @@ var router = new VueRouter({
 var app = new Vue({
   el: "#vue-app",
   router: router,
+  data: function() {
+    return {
+      userName: '',
+      userEmail: ''
+    };
+  },
   created: function() {
     var jwt = localStorage.getItem("jwt");
     if (jwt) {

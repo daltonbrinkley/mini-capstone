@@ -19,8 +19,10 @@
 </head>
 <body>
 
+  <div id="vue-app">
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Dalton's Purebreds</a>
+    <a class="navbar-brand" href="/#/home">Dalton's Purebreds</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -28,12 +30,11 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">About Us <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/#/home">About Us <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Puppies</a>
+          <a class="nav-link" href="/#/index">Available Puppies</a>
         </li>
-
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             User Tools
@@ -47,7 +48,16 @@
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
+          <a class="nav-link" href="/#/login">Login</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link" href="/#/logout">Logout</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/#/signup">Sign-Up</a>
+        </li>
+        <li>
+          <p>Welcome{{ userName }}!</p>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
@@ -59,13 +69,13 @@
 
   <div class="container">
 
-  <div id="vue-app">
-    <a href="/#/sample">Go to a sample page</a>
-    <a href="/#/signup">Signup</a>
-    <a href="/#/login">Login</a>
-    <a href="/#/logout">Logout</a>
+    
+    <!-- <a href="/#/signup">Signup</a> -->
+    <!-- <a href="/#/login">Login</a> -->
+    <!-- <a href="/#/logout">Logout</a> -->
 
-    <router-view></router-view>
+      <router-view></router-view>
+    </div>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -74,16 +84,6 @@
 
 </body>
 </html>
-
-<template id="sample-page">
-  <div class="vue-component">
-    <div class="container">
-      <h1>{{ message }}</h1>
-      <a href="/#/">Go to home page</a>
-      <p>This is a sample page</p>
-    </div>
-  </div>
-</template>
 
 <template id="home-page">
   <div class="vue-component container">
@@ -124,43 +124,6 @@
       <span class="sr-only">Next</span>
     </a>
     </div>
-
-    <div class="row products-row">
-      <div v-for="product in products" class="col-md-4">
-        <div class="card mb-5 bg-light border-dark">
-          <img class="card-img-top" v-bind:src="product.image" alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title">{{ product.name }}</h4>
-            <p class="card-text price">{{ product.price }}</p>
-            <p class="card-text description">{{ product.description }}</p>
-            <a href="#" class="btn btn-primary" v-on:click="setCurrentProduct(product)" data-toggle="modal" data-target="#exampleModal">More info</a>
-          </div>
-        </div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">{{ currentProduct.name }}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        {{ currentProduct.description}}
-      </div>
-      <div class="modal-body">
-        ${{ currentProduct.price}}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-      </div>
-  </div>
 </template>
 
 <template id="signup-page">
@@ -237,5 +200,66 @@
       <button class="btn btn-primary" v-on:click="submit()">Submit</button>
     </div>
 
+  </div>
+</template>
+
+<template id="index-page">
+  <div class="vue-component container">
+    
+    <div class="jumbotron bg-light">
+    <h1 class="display-4">Our Available Puppies!</h1>
+    <p class="lead">Below you will find all of the puppies we currently have for sale.</p>
+    <hr class="my-4">
+    <p>If you are interested or have any questions, please contact us via the link below!</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="#" role="button">Contact Us</a>
+    </p>
+    </div>
+
+    <div class="row products-row">
+      <div v-for="product in products" class="col-md-4">
+        <div class="card mb-5 bg-light border-dark">
+          <img class="card-img-top" v-bind:src="product.image" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">{{ product.name }}</h4>
+            <p class="card-text price">{{ product.price }}</p>
+            <p class="card-text description">{{ product.description }}</p>
+            <a href="#" class="btn btn-primary" v-on:click="setCurrentProduct(product)" data-toggle="modal" data-target="#exampleModal">More info</a>
+          </div>
+        </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ currentProduct.name }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{ currentProduct.description }}
+      </div>
+      <div class="modal-body">
+        ${{ currentProduct.price }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+      </div>
+  </div>
+</template>
+
+<template id="logout-page">
+  <div class="vue-component">
+    <div class="container">
+      <div class="jumbotron bg-light">
+        <h1 class="display-4">{{ message }}</h1>
+      </div>
+    </div>
   </div>
 </template>

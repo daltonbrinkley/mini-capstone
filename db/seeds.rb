@@ -35,3 +35,9 @@
 #   description: "Side View",
 #   product_id: 2
 #   })
+
+# Image.create({title: "Lab Puppy", 
+#   url: "https://i.pinimg.com/originals/ab/ba/cf/abbacfe6de4dc47b88a77f6095748a47.jpg",
+#   description: "Front View",
+#   product_id: 10
+#   })
