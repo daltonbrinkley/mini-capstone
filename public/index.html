@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My App</title>
+  <title>Dalton's Pups</title>
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.js"></script>
@@ -35,17 +35,17 @@
         <li class="nav-item">
           <a class="nav-link" href="/#/index">Available Puppies</a>
         </li>
-        <li class="nav-item dropdown">
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             User Tools
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          </a> -->
+         <!--  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Find a Puppy (Show)</a>
             <a class="dropdown-item" href="#">New Puppy</a>
             <a class="dropdown-item" href="#">Edit Puppies</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">Something else here</a>
-          </div>
+          </div> -->
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/#/login">Login</a>
@@ -92,9 +92,9 @@
     <h1 class="display-4">Find your new companion...</h1>
     <p class="lead">With loyal connections to the top breeders in the country, we offer the best quality puppies here at Dalton's Purebreds.  See below for all available puppies!</p>
     <hr class="my-4">
-    <p>Interested in learning more about where your friend comes from:</p>
+    <p>Interested in bringing home a new furry friend?</p>
     <p class="lead">
-      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more about our Breeders</a>
+      <a class="btn btn-primary btn-lg" href="/#/index" role="button">Browse our available puppies!</a>
     </p>
     </div>
 
@@ -216,8 +216,11 @@
     </p>
     </div>
 
+    <input type="text" v-model="nameFilter" placeholder="Search by Breed">
+<!--     <input type="text" v-model="keywordFilter" placeholder="Search by Keyword"> -->
+
     <div class="row products-row">
-      <div v-for="product in products" class="col-md-4">
+      <div v-for="product in products" class="col-md-4" v-if="isValidProduct(product)">
         <div class="card mb-5 bg-light border-dark">
           <img class="card-img-top" v-bind:src="product.image" alt="Card image cap">
           <div class="card-body">

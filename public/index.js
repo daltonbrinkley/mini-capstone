@@ -165,6 +165,8 @@ var IndexPage = {
     return {
       message: "",
       products: [],
+      nameFilter: "",
+      // keywordFilter: "",
       currentProduct: {
         name: "Name goes here",
         price: "Pice goes here",
@@ -173,13 +175,27 @@ var IndexPage = {
     };
   },
   created: function() {
-    axios.get("v1/products").then(function(response) { 
+    axios.get("v1/products").then(function(response) {
       this.products = response.data;
       console.log(this.products);
     }.bind(this)
     );
   },
-  methods: {},
+  methods: {
+    setCurrentProduct: function(inputProduct) {
+      this.currentProduct = inputProduct;
+    },
+    isValidProduct: function(inputProduct) {
+      var lowerInputName = inputProduct.name.toLowerCase();
+      var lowerNameFilter = this.nameFilter.toLowerCase();
+      return lowerInputName.includes(lowerNameFilter);
+    },
+    // isValidProductKeyword: function(inputProduct) {
+    //   var lowerInputKeyword = inputProduct.keyword.toLowerCase();
+    //   var lowerNameFilter = this.nameFilter.toLowerCase();
+    //   return lowerInputName.includes(lowerNameFilter);
+    // }
+  },
   computed: {}
 };
 
