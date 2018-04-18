@@ -166,7 +166,7 @@ var IndexPage = {
       message: "",
       products: [],
       nameFilter: "",
-      // keywordFilter: "",
+      keywordFilter: "",
       currentProduct: {
         name: "Name goes here",
         price: "Pice goes here",
@@ -185,16 +185,22 @@ var IndexPage = {
     setCurrentProduct: function(inputProduct) {
       this.currentProduct = inputProduct;
     },
-    isValidProduct: function(inputProduct) {
+    isValidProductName: function(inputProduct) {
       var lowerInputName = inputProduct.name.toLowerCase();
       var lowerNameFilter = this.nameFilter.toLowerCase();
       return lowerInputName.includes(lowerNameFilter);
     },
-    // isValidProductKeyword: function(inputProduct) {
-    //   var lowerInputKeyword = inputProduct.keyword.toLowerCase();
-    //   var lowerNameFilter = this.nameFilter.toLowerCase();
-    //   return lowerInputName.includes(lowerNameFilter);
-    // }
+    isValidProductKeyword: function(inputProduct) {
+      var lowerInputKeyword = inputProduct.description.toLowerCase();
+      var lowerKeywordFilter = this.keywordFilter.toLowerCase();
+      return lowerInputKeyword.includes(lowerKeywordFilter);
+    },
+    isValidProduct: function(inputProduct) {
+      return (
+        this.isValidProductName(inputProduct) &&
+        this.isValidProductKeyword(inputProduct)
+      );
+    }
   },
   computed: {}
 };
