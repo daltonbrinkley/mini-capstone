@@ -222,8 +222,8 @@
     </datalist>
     <input type="text" v-model="keywordFilter" placeholder="Search by Keyword">
 
-    <div class="row products-row">
-      <div v-for="product in products" class="col-md-4" v-if="isValidProduct(product)">
+    <div class="row products-row" is="transition-group" name="fade">
+      <div v-for="product in products" class="col-md-4" v-if="isValidProduct(product)" v-bind:key="product.id">
         <div class="card mb-5 bg-light border-dark">
           <img class="card-img-top" v-bind:src="product.image" alt="Card image cap">
           <div class="card-body">
