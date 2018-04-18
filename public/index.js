@@ -167,6 +167,7 @@ var IndexPage = {
       products: [],
       nameFilter: "",
       keywordFilter: "",
+      sortAttribute: "name",
       currentProduct: {
         name: "Name goes here",
         price: "Pice goes here",
@@ -202,8 +203,20 @@ var IndexPage = {
       );
     }
   },
-  computed: {}
+  computed: {
+    sortedProducts: function() {
+      return this.products.sort(
+        function(product1, product2) {
+          var lowerAttribute1 = product1[this.sortAttribute].toLowerCase();
+          var lowerAttribute2 = product2[this.sortAttribute].toLowerCase();
+          return lowerAttribute1.localeCompare(lowerAttribute2);
+        }.bind(this)
+      );
+    }
+  }
 };
+
+// return product1[this.sortAttribute] - product2[this.sortAttribute]
 
 
 var router = new VueRouter({
