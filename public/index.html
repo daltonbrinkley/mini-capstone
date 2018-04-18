@@ -216,7 +216,10 @@
     </p>
     </div>
 
-    <input type="text" v-model="nameFilter" placeholder="Search by Breed">
+    <input type="text" v-model="nameFilter" placeholder="Search by Breed" list="product-names">
+    <datalist id="product-names">
+      <option v-for="product in products"> {{ product.name }} </option>
+    </datalist>
     <input type="text" v-model="keywordFilter" placeholder="Search by Keyword">
 
     <div class="row products-row">
